@@ -1,0 +1,20 @@
+<div class="container text-center wrapper">
+    <div class="row">
+        <h1>Todo List</h1>
+        <div class="col-md-12">
+            <form ng-submit="addTask(taskName)">
+                <input id="input" type="text" placeholder="What needs to be done?" ng-model="taskName">
+                <button class="btn btn-primary add-task" type="submit">Add</button>
+            </form>
+            <div class="task-wrap" ng-repeat="task in taskList track by $index">
+                <span class="task done-{{task.done}}" ng-cloak>{{task.text}}</span>
+                <input class="new-check-box" type="checkbox" ng-model="task.done">
+                <br>
+            </div>
+            <br><br>
+            <button class="btn btn-primary" ng-click="clearAllTasks()">Clean Tasks</button>
+            <button class="btn btn-primary" ng-click="cleanMarkedTasks()">Clean Marked</button><br><br>
+            <span class="task-counts" ng-cloak>{{remainingTasks()}} of {{taskList.length}} remaining</span>
+        </div>
+    </div>
+</div>

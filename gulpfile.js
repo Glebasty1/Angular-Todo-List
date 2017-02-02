@@ -18,12 +18,14 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 });
+
 gulp.task('clean', function() {
     gulp.src('./dist/*')
       .pipe(clean({force: true}));
     gulp.src('./app/js/bundled.js')
       .pipe(clean({force: true}));
 });
+
 gulp.task('minify-css', function() {
   var opts = {comments:true,spare:true};
   gulp.src(['./app/**/*.css', '!./app/bower_components/**'])
@@ -65,7 +67,7 @@ gulp.task('connectDist', function () {
 });
 
 gulp.task('browserify', function() {
-  gulp.src(['app/js/main.js'])
+  gulp.src(['app/js/TodoList.module.js'])
   .pipe(browserify({
     insertGlobals: true,
     debug: true
@@ -75,13 +77,24 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('browserifyDist', function() {
-  gulp.src(['app/js/main.js'])
+  gulp.src(['app/js/TodoList.module.js'])
   .pipe(browserify({
     insertGlobals: true,
     debug: true
   }))
+      .pipe(uglify({
+          // inSourceMap:
+          // outSourceMap: "app.js.map"
+      }))
   .pipe(concat('bundled.js'))
+
   .pipe(gulp.dest('./dist/js'));
+});
+
+//add main module to dist
+gulp.task('mainAppModuleDist', function () {
+   gulp.src(['app/app.js'])
+       .pipe(gulp.dest('./dist'))
 });
 
 
@@ -89,13 +102,13 @@ gulp.task('browserifyDist', function() {
 gulp.task('default', function() {
   runSequence(
     ['clean'],
-    ['lint', 'browserify', 'connect']
+    ['lint','browserify', 'connect']
   );
 });
 // *** build task *** //
 gulp.task('build', function() {
   runSequence(
     ['clean'],
-    ['lint', 'minify-css', 'browserifyDist', 'copy-html-files', 'copy-bower-components', 'connectDist']
+    ['lint', 'minify-css', 'mainAppModuleDist', 'browserifyDist', 'copy-html-files', 'copy-bower-components', 'connectDist']
   );
 });

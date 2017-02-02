@@ -14,8 +14,6 @@
   ],
   "dependencies": {
     "angular": "~1.2.22",
-    "angular-animate": "~1.2.22",
-    "angular-route": "~1.2.22",
     "bootstrap": "~3.2.0",
     "jshint": "^2.9.1"
   }

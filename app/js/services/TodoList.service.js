@@ -5,6 +5,7 @@ module.exports = function TaskService() {
         {text: "Clean room", done: false}
     ];
 
+    //initialization our tasks to local storage
     function init() {
      var tasksFromStorage = localStorage.getItem('tasks');
 
@@ -15,6 +16,7 @@ module.exports = function TaskService() {
      }
      }
 
+     //method for updating our local storage
     function syncWithStorage() {
      localStorage.setItem('tasks', JSON.stringify(tasks));
      }

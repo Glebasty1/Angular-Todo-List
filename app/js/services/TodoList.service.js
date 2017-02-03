@@ -58,8 +58,13 @@ module.exports = function TaskService() {
 
     self.clearAllTasks = function() {
         tasks = [];
-        syncWithStorage();
+
         return tasks;
+    };
+
+    self.ChangeTaskStatus = function () {
+        tasks.done = !tasks.done;
+        syncWithStorage();
     };
 
     init();

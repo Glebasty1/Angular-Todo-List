@@ -18,4 +18,8 @@ module.exports = function TodoCtrl($scope, TaskService) {
     $scope.remainingTasks = function () {
         return TaskService.getRemainingCount();
     };
+
+    $scope.ChangeTaskStatus = function () {
+      return TaskService.ChangeTaskStatus();
+    };
 };

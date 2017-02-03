@@ -8,7 +8,7 @@
             </form>
             <div class="task-wrap" ng-repeat="task in taskList track by $index">
                 <span class="task done-{{task.done}}" ng-cloak>{{task.text}}</span>
-                <input class="new-check-box" type="checkbox" ng-model="task.done">
+                <input class="new-check-box" type="checkbox" ng-model="task.done" ng-change="ChangeTaskStatus()">
                 <br>
             </div>
             <br><br>
